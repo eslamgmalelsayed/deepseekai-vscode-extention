@@ -1,1 +1,0 @@
-# deepseekai-vscode-extention
