@@ -1,21 +1,68 @@
 {
-  "name": "deepseekai-vscode-extention",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite --open",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+  "name": "deepseekai-vscode-extension",
+  "displayName": "DeepSeekAI VS Code",
+  "description": "VS Code extension to integrate with DeepSeek AI",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
   },
-  "dependencies": {
-    "vue": "^3.5.13"
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "deepseekai.start",
+        "title": "Start DeepSeek AI"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "deepseekai-sidebar",
+          "title": "DeepSeek AI",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "deepseekai-sidebar": [
+        {
+          "type": "webview",
+          "id": "deepseekai.chatView",
+          "name": "Chat"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile:extension": "vite build",
+    "compile:webview": "vite build -c webview-vite.config.ts",
+    "compile": "npm run compile:webview && npm run compile:extension",
+    "watch:extension": "vite build --watch",
+    "watch:webview": "vite build -c webview-vite.config.ts --watch",
+    "watch": "npm-run-all -p watch:webview watch:extension",
+    "package": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/tsconfig": "^0.7.0",
-    "typescript": "~5.6.2",
-    "vite": "^6.0.5",
-    "vue-tsc": "^2.2.0"
+    "@types/node": "^22.13.10",
+    "@types/vscode": "^1.98.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.0",
+    "@typescript-eslint/parser": "^8.26.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vue/compiler-sfc": "^3.5.13",
+    "eslint": "^8.56.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.2",
+    "vite": "^5.0.0",
+    "vue": "^3.5.13"
+  },
+  "dependencies": {
+    "axios": "^1.6.2"
   }
 }

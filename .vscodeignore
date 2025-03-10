@@ -1,0 +1,18 @@
+.vscode/**
+.vscode-test/**
+src/**
+node_modules/**
+.gitignore
+.yarnrc
+webpack.config.js
+vite.config.ts
+webview-vite.config.ts
+tsconfig.json
+.eslintrc.json
+**/*.map
+**/*.ts
+**/*.vue
+
+# Allow dist folder but ignore source maps
+!dist/**
+dist/**/*.map

@@ -5,24 +5,21 @@ import path from 'path';
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: 'dist',
+    outDir: 'dist/webview',
     sourcemap: true,
-    lib: {
-      entry: path.resolve(__dirname, 'src/extension.ts'),
-      formats: ['cjs'],
-      fileName: 'extension'
-    },
     rollupOptions: {
-      external: ['vscode'],
+      input: path.resolve(__dirname, 'src/webview/main.ts'),
       output: {
-        entryFileNames: '[name].js',
+        entryFileNames: 'main.js',
+        chunkFileNames: '[name].[hash].js',
+        assetFileNames: '[name].[ext]'
       }
     },
     emptyOutDir: true,
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src/webview')
     }
   }
 });
